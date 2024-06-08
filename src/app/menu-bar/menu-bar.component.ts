@@ -1,6 +1,6 @@
 import { Component } from '@angular/core';
 import { BagObservableService } from '../services/bag-observable.service';
-import { Subscription } from 'rxjs';
+import { Subscription } from 'rxjs/dist/types/internal/Subscription';
 // import { BagService } from '../services/bag.service';
 
 @Component({

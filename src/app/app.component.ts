@@ -1,7 +1,6 @@
 import { Component } from '@angular/core';
 import { NavigationEnd, NavigationStart, Router } from '@angular/router';
-import { Observable, timer } from 'rxjs';
-import { switchMap, filter, tap } from 'rxjs/operators';
+import { timer, filter, switchMap, tap } from 'rxjs/dist/types';
 
 @Component({
   selector: 'app-root',
