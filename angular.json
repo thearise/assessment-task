@@ -25,9 +25,15 @@
               "src/assets"
             ],
             "styles": [
+              "node_modules/bootstrap/dist/css/bootstrap.min.css",
+              "src/assets/css/vendor.css",
+              "src/assets/css/style.css",
               "src/styles.css"
             ],
-            "scripts": []
+            "scripts": [
+              "src/assets/js/vendor.min.js",
+              "src/assets/js/app.js"
+            ]
           },
           "configurations": {
             "production": {
@@ -87,12 +93,32 @@
               "src/assets"
             ],
             "styles": [
+              "node_modules/bootstrap/dist/css/bootstrap.min.css",
+              "src/assets/css/vendor.css",
+              "src/assets/css/style.css",
               "src/styles.css"
             ],
-            "scripts": []
+            "scripts": [
+              "src/assets/js/vendor.min.js",
+              "src/assets/js/app.js"
+            ]
+          }
+        },
+        "lint": {
+          "builder": "@angular-eslint/builder:lint",
+          "options": {
+            "lintFilePatterns": [
+              "src/**/*.ts",
+              "src/**/*.html"
+            ]
           }
         }
       }
     }
+  },
+  "cli": {
+    "schematicCollections": [
+      "@angular-eslint/schematics"
+    ]
   }
 }
