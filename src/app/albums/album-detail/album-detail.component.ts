@@ -169,11 +169,12 @@ export class AlbumDetailComponent {
   }
 
   getPaginatedPhotos(): Photo[] {
-    return this.paginationService.getPaginatedItems(this.filteredPhotoList, this.currentPage, this.postsPerPage);
+    const startIndex = (this.currentPage - 1) * this.postsPerPage;
+    return this.filteredPhotoList.slice(startIndex, startIndex + this.postsPerPage);
   }
 
   getTotalPages(): number {
-    return this.paginationService.getTotalPages(this.filteredPhotoList, this.postsPerPage);
+    return Math.ceil(this.filteredPhotoList.length / this.postsPerPage);
   }
 
   getPageNumbers(): (number | string)[] {

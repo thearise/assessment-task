@@ -73,7 +73,7 @@
                             </div>
                         </div> -->
                         <app-search-filter (onSearchEvent)="onSearch($event)" (onSortChangeEvent)="onSortChange($event)" [sortByInput]="sortByList" [searchQueryInput]="searchQuery"></app-search-filter>
-                        <div>
+                        <div *ngIf="!loading && getPaginatedPhotos() && getPaginatedPhotos().length > 0">
                             <div class="tab-content">
                                 <div class="tab-pane fade show active" id="projects" role="tabpanel">
                                     <div class="content-list">
@@ -99,6 +99,20 @@
                                 </div>
                             </div>
                         </div>
+                        <!-- Display Error Message -->
+                        <div *ngIf="error">
+                            <p>{{ error }}</p>
+                        </div>
+                        <!-- Display No Data for Search Result -->
+                        <div *ngIf="!error && !loading && getPaginatedPhotos() && getPaginatedPhotos().length == 0">
+                            <p>No data found</p>
+                        </div>
+                        <!-- Display Loader -->
+                        <div *ngIf="loading" class="d-flex justify-content-center align-items-center" style="height: 200px;">
+                            <div class="spinner-border text-primary" role="status">
+                                <span class="visually-hidden">Loading...</span>
+                            </div>
+                        </div>
                         <!-- <table class="table">
                           <thead>
                             <tr>
@@ -119,7 +133,7 @@
                     </div>
                 </div>
                 <!-- Pagination -->
-                <nav aria-label="Page navigation example" class="d-flex justify-content-center">
+                <nav *ngIf="!loading && getPaginatedPhotos() && getPaginatedPhotos().length > 0" aria-label="Page navigation example" class="d-flex justify-content-center">
                     <ul class="pagination">
                         <li class="page-item" [class.disabled]="currentPage === 1">
                             <a class="page-link" (click)="onPageChange(currentPage - 1)">Previous</a>
