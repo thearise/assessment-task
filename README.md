@@ -1,6 +1,29 @@
 # MyTestApp
 
-This project was generated with [Angular CLI](https://github.com/angular/angular-cli) version 16.0.0.
+This project was generated with [Angular CLI](https://github.com/angular/angular-cli) version 18.0.3.
+
+## Angular Version Information
+
+Angular CLI: 18.0.3
+Node: 22.2.0
+Package Manager: npm 10.7.0
+OS: darwin x64
+
+Angular: 18.0.2
+... animations, common, compiler, compiler-cli, core, forms
+... platform-browser, platform-browser-dynamic, router
+
+Package                         Version
+---------------------------------------------------------
+@angular-devkit/architect       0.1800.3
+@angular-devkit/build-angular   18.0.3
+@angular-devkit/core            18.0.3
+@angular-devkit/schematics      18.0.3
+@angular/cli                    18.0.3
+@schematics/angular             18.0.3
+rxjs                            7.8.1
+typescript                      5.4.5
+zone.js                         0.14.7
 
 ## Development server
 
@@ -16,11 +39,19 @@ Run `ng build` to build the project. The build artifacts will be stored in the `
 
 ## Running unit tests
 
-Run `ng test` to execute the unit tests via [Karma](https://karma-runner.github.io).
+Run `ng test` to execute the unit tests via [Jest](https://jestjs.io).
 
 ## Running end-to-end tests
 
 Run `ng e2e` to execute the end-to-end tests via a platform of your choice. To use this command, you need to first add a package that implements end-to-end testing capabilities.
+
+## Installing Packages
+
+To install the necessary packages, run:
+
+```sh
+npm install
+```
 
 ## Further help
 
