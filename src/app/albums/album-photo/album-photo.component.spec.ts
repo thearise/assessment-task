@@ -1,6 +1,8 @@
 import { ComponentFixture, TestBed } from '@angular/core/testing';
 
 import { AlbumPhotoComponent } from './album-photo.component';
+import { RouterTestingModule } from '@angular/router/testing';
+import { HttpClientTestingModule } from "@angular/common/http/testing";
 
 describe('AlbumPhotoComponent', () => {
   let component: AlbumPhotoComponent;
@@ -8,7 +10,8 @@ describe('AlbumPhotoComponent', () => {
 
   beforeEach(async () => {
     await TestBed.configureTestingModule({
-      imports: [AlbumPhotoComponent]
+      declarations: [AlbumPhotoComponent],
+      imports: [RouterTestingModule, HttpClientTestingModule],
     })
     .compileComponents();
 

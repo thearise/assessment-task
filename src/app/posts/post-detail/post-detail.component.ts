@@ -1,7 +1,7 @@
 import { Component, OnInit } from '@angular/core';
 import { ActivatedRoute } from '@angular/router';
-import { PostDetailService } from 'src/app/services/posts/post-detail.service';
-import { Post } from 'src/app/services/posts/post.model';
+import { PostDetailService } from '../../services/posts/post-detail.service';
+import { Post } from '../../services/posts/post.model';
 
 @Component({
   selector: 'app-post-detail',

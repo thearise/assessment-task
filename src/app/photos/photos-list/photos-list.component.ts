@@ -1,8 +1,8 @@
 import { Component } from '@angular/core';
 import { ActivatedRoute, Router } from '@angular/router';
-import { PaginationService } from 'src/app/services/pagination/pagination.service';
-import { Photo } from 'src/app/services/photos/photo.model';
-import { PhotoService } from 'src/app/services/photos/photo.service';
+import { PaginationService } from '../../services/pagination/pagination.service';
+import { Photo } from '../../services/photos/photo.model';
+import { PhotoService } from '../../services/photos/photo.service';
 
 @Component({
   selector: 'app-photos-list',

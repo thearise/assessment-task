@@ -1,6 +1,8 @@
 import { ComponentFixture, TestBed } from '@angular/core/testing';
 
 import { MenuBarComponent } from './menu-bar.component';
+import { RouterTestingModule } from '@angular/router/testing';
+import { HttpClientTestingModule } from "@angular/common/http/testing";
 
 describe('MenuBarComponent', () => {
   let component: MenuBarComponent;
@@ -8,7 +10,10 @@ describe('MenuBarComponent', () => {
 
   beforeEach(() => {
     TestBed.configureTestingModule({
-      declarations: [MenuBarComponent]
+      declarations: [MenuBarComponent],
+      imports: [
+        RouterTestingModule, HttpClientTestingModule
+      ]
     });
     fixture = TestBed.createComponent(MenuBarComponent);
     component = fixture.componentInstance;

@@ -1,8 +1,8 @@
 import { Component, OnInit } from '@angular/core';
 import { ActivatedRoute, Router } from '@angular/router';
-import { Post } from 'src/app/services/posts/post.model';
-import { PostService } from 'src/app/services/posts/post.service';
-import { PaginationService } from 'src/app/services/pagination/pagination.service';
+import { Post } from '../../services/posts/post.model';
+import { PostService } from '../../services/posts/post.service';
+import { PaginationService } from '../../services/pagination/pagination.service';
 
 @Component({
   selector: 'app-posts-list',
@@ -130,4 +130,12 @@ export class PostsListComponent implements OnInit {
     const totalPages = this.getTotalPages();
     return this.paginationService.calculatePaginationRange(this.currentPage, totalPages);
   }
+
+
+  // Helper method for tests
+  /* @if TEST */
+  getTestRoute(): ActivatedRoute {
+    return this.route;
+  }
+  /* @endif */
 }

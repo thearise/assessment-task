@@ -1,10 +1,10 @@
 import { Component } from '@angular/core';
 import { ActivatedRoute, Params, Router } from '@angular/router';
-import { Album } from 'src/app/services/albums/album.model';
-import { AlbumService } from 'src/app/services/albums/album.service';
-import { PaginationService } from 'src/app/services/pagination/pagination.service';
-import { Photo } from 'src/app/services/photos/photo.model';
-import { PhotoService } from 'src/app/services/photos/photo.service';
+import { Album } from '../../services/albums/album.model';
+import { AlbumService } from '../../services/albums/album.service';
+import { PaginationService } from '../../services/pagination/pagination.service';
+import { Photo } from '../../services/photos/photo.model';
+import { PhotoService } from '../../services/photos/photo.service';
 
 @Component({
   selector: 'app-albums-list',

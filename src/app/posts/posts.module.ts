@@ -21,7 +21,8 @@ import { RouterModule } from '@angular/router';
     FormsModule,
   ],
   exports: [
-    PostsListComponent
+    PostsListComponent,
+    PostDetailComponent,
   ]
 })
 export class PostsModule { }

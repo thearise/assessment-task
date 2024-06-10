@@ -1,7 +1,7 @@
 import { Component } from '@angular/core';
 import { ActivatedRoute, Router } from '@angular/router';
-import { PhotoDetailService } from 'src/app/services/photos/photo-detail.service';
-import { Photo } from 'src/app/services/photos/photo.model';
+import { PhotoDetailService } from '../../services/photos/photo-detail.service';
+import { Photo } from '../../services/photos/photo.model';
 
 @Component({
   selector: 'app-photo-detail',
@@ -27,7 +27,7 @@ export class PhotoDetailComponent {
   getPostDetail(): void {
     this.idParam = this.route.snapshot.queryParamMap.get('id');
     this.albumIdParam = this.route.snapshot.queryParamMap.get('albumId');
-    console.log('param: ' + JSON.stringify(this.idParam));
+  
     if (this.idParam !== null) {
       const id = +this.idParam;
       this.photoDetailService.getPhotoById(id)
@@ -46,6 +46,7 @@ export class PhotoDetailComponent {
       this.photo = null;
     }
   }
+  
 
   goToAlbumPage() {
     const url = `/albums/album-detail?id=${this.albumIdParam}`;

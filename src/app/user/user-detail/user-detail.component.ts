@@ -1,11 +1,11 @@
 import { Component } from '@angular/core';
 import { ActivatedRoute, Router, Params } from '@angular/router';
-import { Album } from 'src/app/services/albums/album.model';
-import { AlbumService } from 'src/app/services/albums/album.service';
-import { Photo } from 'src/app/services/photos/photo.model';
-import { PhotoService } from 'src/app/services/photos/photo.service';
-import { Post } from 'src/app/services/posts/post.model';
-import { PostService } from 'src/app/services/posts/post.service';
+import { Album } from '../../services/albums/album.model';
+import { AlbumService } from '../../services/albums/album.service';
+import { Photo } from '../../services/photos/photo.model';
+import { PhotoService } from '../../services/photos/photo.service';
+import { Post } from '../../services/posts/post.model';
+import { PostService } from '../../services/posts/post.service';
 
 @Component({
   selector: 'app-user-detail',

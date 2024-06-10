@@ -2,7 +2,6 @@ import { TestBed } from '@angular/core/testing';
 import { RouterTestingModule } from '@angular/router/testing';
 import { AppComponent } from './app.component';
 import { MenuBarComponent } from './menu-bar/menu-bar.component';
-import { FooterPageComponent } from './footer-page/footer-page.component';
 
 describe('AppComponent', () => {
   beforeEach(() => TestBed.configureTestingModule({
@@ -12,7 +11,6 @@ describe('AppComponent', () => {
     declarations: [
       AppComponent,
       MenuBarComponent,
-      FooterPageComponent
     ]
   }));
 
