@@ -11,29 +11,45 @@
       "prefix": "app",
       "architect": {
         "build": {
-          "builder": "@angular-devkit/build-angular:browser",
+          "builder": "@angular-devkit/build-angular:application",
           "options": {
-            "outputPath": "dist/my_test_app",
+            "outputPath": {
+              "base": "dist/my_test_app"
+            },
             "index": "src/index.html",
-            "main": "src/main.ts",
             "polyfills": [
               "zone.js"
             ],
             "tsConfig": "tsconfig.app.json",
             "assets": [
               "src/favicon.ico",
-              "src/assets"
+              "src/assets",
+              "src/assets/css",
+              "src/assets/fonts",
+              "src/assets/img",
+              "src/assets/img/components",
+              "src/assets/img/layouts",
+              "src/assets/img/overview",
+              "src/assets/js"
             ],
             "styles": [
               "node_modules/bootstrap/dist/css/bootstrap.min.css",
-              "src/assets/css/vendor.css",
-              "src/assets/css/style.css",
-              "src/styles.css"
+              "src/assets/css/theme.css"
             ],
             "scripts": [
-              "src/assets/js/vendor.min.js",
-              "src/assets/js/app.js"
-            ]
+              "src/assets/js/autosize.min.js",
+              "src/assets/js/bootstrap.js",
+              "src/assets/js/draggable.bundle.legacy.js",
+              "src/assets/js/dropzone.min.js",
+              "src/assets/js/flatpickr.min.js",
+              "src/assets/js/jquery.min.js",
+              "src/assets/js/list.min.js",
+              "src/assets/js/popper.min.js",
+              "src/assets/js/prism.js",
+              "src/assets/js/swap-animation.js",
+              "src/assets/js/theme.js"
+            ],
+            "browser": "src/main.ts"
           },
           "configurations": {
             "production": {
@@ -52,9 +68,7 @@
               "outputHashing": "all"
             },
             "development": {
-              "buildOptimizer": false,
               "optimization": false,
-              "vendorChunk": true,
               "extractLicenses": false,
               "sourceMap": true,
               "namedChunks": true
@@ -78,30 +92,6 @@
           "builder": "@angular-devkit/build-angular:extract-i18n",
           "options": {
             "buildTarget": "my_test_app:build"
-          }
-        },
-        "test": {
-          "builder": "@angular-devkit/build-angular:karma",
-          "options": {
-            "polyfills": [
-              "zone.js",
-              "zone.js/testing"
-            ],
-            "tsConfig": "tsconfig.spec.json",
-            "assets": [
-              "src/favicon.ico",
-              "src/assets"
-            ],
-            "styles": [
-              "node_modules/bootstrap/dist/css/bootstrap.min.css",
-              "src/assets/css/vendor.css",
-              "src/assets/css/style.css",
-              "src/styles.css"
-            ],
-            "scripts": [
-              "src/assets/js/vendor.min.js",
-              "src/assets/js/app.js"
-            ]
           }
         },
         "lint": {

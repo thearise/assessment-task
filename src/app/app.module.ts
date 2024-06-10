@@ -8,6 +8,8 @@ import { MenuBarComponent } from './menu-bar/menu-bar.component';
 import { FooterPageComponent } from './footer-page/footer-page.component';
 import { TestPageComponent } from './test-page/test-page.component';
 import { SalePageComponent } from './sale-page/sale-page.component';
+import { HttpClientModule } from '@angular/common/http';
+import { FormsModule, ReactiveFormsModule } from '@angular/forms';
 
 @NgModule({
   declarations: [
@@ -16,13 +18,18 @@ import { SalePageComponent } from './sale-page/sale-page.component';
     MenuBarComponent,
     FooterPageComponent,
     TestPageComponent,
-    SalePageComponent
+    SalePageComponent,
   ],
   imports: [
     BrowserModule,
-    AppRoutingModule
+    AppRoutingModule,
+    HttpClientModule,
+    FormsModule,
+    ReactiveFormsModule,
   ],
-  providers: [],
+  providers: [
+    // PostService
+  ],
   bootstrap: [AppComponent]
 })
 export class AppModule { }

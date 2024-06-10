@@ -1,0 +1,44 @@
+.album-image {
+    width: 100%;
+    /* Adjust the width as necessary */
+    height: auto;
+    margin-top: 10px;
+    /* Optional: Add some space above the image */
+    border-radius: 5px;
+    /* Optional: Add rounded corners to the image */
+}
+
+.title-ellipsis {
+    white-space: nowrap;
+    overflow: hidden;
+    text-overflow: ellipsis;
+    display: block;
+    /* Ensures that the ellipsis works correctly */
+}
+
+.table tbody tr.focus-custom:hover td {
+    /* background-color: #f5f5f5 !important; */
+    color: #007bff;
+    cursor: pointer;
+    /* Change this to your desired hover color */
+}
+
+.table tbody tr.focus-custom.even td {
+    background-color: #f1f1f1 !important;
+}
+
+.pagination .page-item .page-link {
+    cursor: pointer;
+}
+
+/* .pagination .page-item.disabled a.page-link {
+    background-color: #007bff;
+    color: #fff;
+    cursor: pointer;
+} */
+
+.pagination .page-item.disabled a.page-link.buttons {
+    background-color: #007bff;
+    color: #fff;
+    cursor: pointer;
+}

@@ -1,0 +1,178 @@
+import { Component } from '@angular/core';
+import { ActivatedRoute, Params, Router } from '@angular/router';
+import { AlbumDetailService } from 'src/app/services/albums/album-detail.service';
+import { Album } from 'src/app/services/albums/album.model';
+import { PaginationService } from 'src/app/services/pagination/pagination.service';
+import { Photo } from 'src/app/services/photos/photo.model';
+import { PhotoService } from 'src/app/services/photos/photo.service';
+
+@Component({
+  selector: 'app-album-detail',
+  templateUrl: './album-detail.component.html',
+  styleUrl: './album-detail.component.css'
+})
+export class AlbumDetailComponent {
+  album!: Album | undefined | null; // definite assignment assertion
+  error: string = ''; // Initializing error variable
+  idParam: any = null;
+
+  photos: Photo[] = [];
+  filteredPhotoList: Photo[] = [];
+  loading: boolean = false;
+  errorPhoto: string = '';
+  currentPage: number = 1;
+  postsPerPage: number = 15;
+  searchQuery: string = '';
+  sortBy: string = 'id';
+
+  constructor(
+    private route: ActivatedRoute,
+    private albumDetailService: AlbumDetailService,
+    private router: Router,
+    private photoService: PhotoService,
+    private paginationService: PaginationService
+  ) { }
+
+  ngOnInit(): void {
+    this.getAlbumDetail();
+    this.route.queryParams.subscribe(params => {
+      const page = parseInt(params['page'], 10) || 1;
+      const search = params['search'] || '';
+      const sort = params['sort'] || 'id';
+      this.currentPage = page;
+      this.searchQuery = search;
+      this.sortBy = sort;
+      this.fetchPhotos(params);
+    })
+  }
+
+  getAlbumDetail(): void {
+    this.idParam = this.route.snapshot.queryParamMap.get('id');
+    console.log('param: ' + JSON.stringify(this.idParam));
+    if (this.idParam !== null) {
+      const id = +this.idParam;
+      this.albumDetailService.getAlbumById(id)
+        .subscribe(
+          album => {
+            this.album = album;
+            this.error = ''; // Reset error if successful
+          },
+          error => {
+            this.error = error;
+            this.album = null;
+          }
+        );
+    } else {
+      this.error = 'No album ID provided.';
+      this.album = null;
+    }
+  }
+
+  generateRandomColor(): string {
+    const letters = '0123456789ABCDEF';
+    let color = '';
+    for (let i = 0; i < 6; i++) {
+      color += letters[Math.floor(Math.random() * 16)];
+    }
+    return color;
+  }
+
+  generateRandomQuery(): string {
+    return Math.random().toString(36).substring(7);
+  }
+
+  onSortChange(event: any): void {
+    this.sortBy = event.target.value;
+    this.router.navigate([], {
+      relativeTo: this.route,
+      queryParams: { sort: this.sortBy || null, page: 1 },
+      queryParamsHandling: 'merge'
+    });
+  }
+
+  goToAlbumDetail(id: number): void {
+    const url = `/albums/album-detail?id=${id}`;
+    this.router.navigateByUrl(url);
+  }
+
+  fetchPhotos(params: Params) {
+    this.loading = true;
+    this.error = '';
+    this.photoService.getPhotos(params).subscribe(
+      photos => {
+        this.photos = photos.filter((photo: Photo) => {
+          return photo.albumId == this.idParam;
+        })
+        this.filteredPhotos();
+        this.loading = false;
+      },
+      error => {
+        this.error = "An error occurred while fetching albums.";
+        this.loading = false;
+      }
+    )
+  }
+
+  filteredPhotos(): void {
+    if(this.searchQuery) {
+      this.filteredPhotoList = this.photos.filter(photo => {
+        return photo.title.toLowerCase().includes(this.searchQuery.toLowerCase());
+      });
+    } else {
+      this.filteredPhotoList = this.photos;
+    }
+    this.sortPhotos();
+  }
+
+  sortPhotos() {
+    this.filteredPhotoList.sort((a, b) => {
+      if(this.sortBy === 'title') {
+        return a.title.localeCompare(b.title);
+      } else {
+        return a.id - b.id;
+      }
+    });
+  }
+
+  onSearch() {
+    this.currentPage = 1;
+    this.filteredPhotos();
+    this.router.navigate([], {
+      relativeTo: this.route,
+      queryParams: { search: this.searchQuery || null, page: 1 },
+      queryParamsHandling: 'merge'
+    });
+  }
+
+  calculateIndex(index: number): number {
+    return (this.currentPage - 1) * this.postsPerPage + index + 1;
+  }
+
+  onPageChange(pageNumber: any): void {
+    this.currentPage = pageNumber;
+    this.router.navigate([], {
+      relativeTo: this.route,
+      queryParams: { page: pageNumber },
+      queryParamsHandling: 'merge'
+    });
+  }
+
+  goToPhotoDetail(id: number, albumId: number): void {
+    const url = `/albums/photo-detail?id=${id}&albumId=${albumId}`;
+    this.router.navigateByUrl(url);
+  }
+
+  getPaginatedPhotos(): Photo[] {
+    const startIndex = (this.currentPage - 1) * this.postsPerPage;
+    return this.filteredPhotoList.slice(startIndex, startIndex + this.postsPerPage);
+  }
+
+  getTotalPages(): number {
+    return Math.ceil(this.filteredPhotoList.length / this.postsPerPage);
+  }
+
+  getPageNumbers(): (number | string)[] {
+    const totalPages = this.getTotalPages();
+    return this.paginationService.calculatePaginationRange(this.currentPage, totalPages);
+  }
+}

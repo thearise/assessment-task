@@ -1,9 +1,5 @@
-<app-menu-bar></app-menu-bar>
-
-
-<!-- <app-home-page></app-home-page> -->
-<div *ngIf="loading" style="position: absolute; margin-top: 100px;" class="loading-indicator">Loading...</div>
-<router-outlet></router-outlet>
-
-
-<app-footer-page></app-footer-page>
+<div class="layout layout-nav-side">
+    <app-menu-bar></app-menu-bar>
+    <router-outlet></router-outlet>
+    <!-- <app-sale-page></app-sale-page> -->
+</div>

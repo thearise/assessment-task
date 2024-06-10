@@ -1,0 +1,56 @@
+<div class="main-container">
+
+    <div class="navbar bg-white breadcrumb-bar">
+        <nav aria-label="breadcrumb">
+            <ol class="breadcrumb">
+                <li class="breadcrumb-item"><a routerLink="/dashboard">Dashboard</a>
+                </li>
+                <li class="breadcrumb-item" aria-current="page"><a routerLink="/posts">Posts</a>
+                </li>
+                <li class="breadcrumb-item active" aria-current="page">Post: {{idParam}}</li>
+            </ol>
+        </nav>
+        <!-- <app-breadcrumb></app-breadcrumb> -->
+
+        <!-- <div class="dropdown">
+            <button class="btn btn-round" role="button" data-toggle="dropdown" aria-expanded="false">
+                <i class="material-icons">settings</i>
+            </button>
+            <div class="dropdown-menu dropdown-menu-right">
+
+                <a class="dropdown-item" href="#" data-toggle="modal" data-target="#project-edit-modal">Edit Project</a>
+                <a class="dropdown-item" href="#">Share</a>
+                <a class="dropdown-item" href="#">Mark as Complete</a>
+                <div class="dropdown-divider"></div>
+                <a class="dropdown-item text-danger" href="#">Archive</a>
+
+            </div>
+        </div> -->
+
+    </div>
+    <div class="container">
+        <div class="row justify-content-center">
+            <div class="col-lg-11 col-xl-10">
+                <div class="page-header">
+                    <h1>Posts</h1>
+                    <p class="lead">Data loaded from <a href="https://jsonplaceholder.typicode.com/posts/{{idParam}}"
+                            class="text-decoration-underline text-primary">https://jsonplaceholder.typicode.com/posts/{{idParam}}</a>
+                    </p>
+                </div>
+
+                <!-- Display Post Details -->
+                <div *ngIf="post">
+                    <h2>{{ post.title }}</h2>
+                    <p>{{ post.body }}</p>
+                </div>
+
+                <!-- Display Error Message -->
+                <div *ngIf="error">
+                    <p>{{ error }}</p>
+                </div>
+
+            </div>
+        </div>
+    </div>
+
+</div>

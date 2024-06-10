@@ -1,0 +1,57 @@
+<div class="main-container">
+
+    <div class="navbar bg-white breadcrumb-bar">
+        <nav aria-label="breadcrumb">
+            <ol class="breadcrumb">
+                <li class="breadcrumb-item"><a routerLink="/dashboard">Dashboard</a>
+                </li>
+                <li class="breadcrumb-item" aria-current="page"><a routerLink="/photos">Photos</a>
+                </li>
+                <li class="breadcrumb-item active" aria-current="page">Photo: {{idParam}}</li>
+            </ol>
+        </nav>
+        <!-- <app-breadcrumb></app-breadcrumb> -->
+
+        <!-- <div class="dropdown">
+            <button class="btn btn-round" role="button" data-toggle="dropdown" aria-expanded="false">
+                <i class="material-icons">settings</i>
+            </button>
+            <div class="dropdown-menu dropdown-menu-right">
+
+                <a class="dropdown-item" href="#" data-toggle="modal" data-target="#project-edit-modal">Edit Project</a>
+                <a class="dropdown-item" href="#">Share</a>
+                <a class="dropdown-item" href="#">Mark as Complete</a>
+                <div class="dropdown-divider"></div>
+                <a class="dropdown-item text-danger" href="#">Archive</a>
+
+            </div>
+        </div> -->
+
+    </div>
+    <div class="container">
+        <div class="row justify-content-center">
+            <div class="col-lg-11 col-xl-10">
+                <div class="page-header">
+                    <h1>Photos</h1>
+                    <p class="lead">Data loaded from <a href="https://jsonplaceholder.typicode.com/photos/{{idParam}}"
+                            class="text-decoration-underline text-primary">https://jsonplaceholder.typicode.com/photos/{{idParam}}</a>
+                    </p>
+                </div>
+
+                <!-- Display Post Details -->
+                <div *ngIf="photo">
+                    <h2>{{ photo.title }}</h2>
+                    <a class="theme-color cursor-pointer" (click)="goToAlbumPage()">View Album</a>
+                    <img class="photo-image" [src]="photo.url" alt="{{ photo.title }}">
+                </div>
+
+                <!-- Display Error Message -->
+                <div *ngIf="error">
+                    <p>{{ error }}</p>
+                </div>
+
+            </div>
+        </div>
+    </div>
+
+</div>

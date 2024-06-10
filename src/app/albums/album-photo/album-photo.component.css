@@ -1,0 +1,6 @@
+.photo-image {
+    width: 100%; /* Ensures the image takes up the full width of its container */
+    height: auto; /* Maintains the aspect ratio */
+    margin-top: 10px; /* Optional: Add some space above the image */
+    border-radius: 5px; /* Optional: Add rounded corners to the image */
+  }

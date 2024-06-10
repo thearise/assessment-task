@@ -1,0 +1,111 @@
+<div class="main-container">
+
+    <div class="navbar bg-white breadcrumb-bar">
+        <nav aria-label="breadcrumb">
+            <ol class="breadcrumb">
+                <li class="breadcrumb-item"><a routerLink="/dashboard">Dashboard</a>
+                </li>
+                <!-- <li class="breadcrumb-item active" aria-current="page"><a routerLink="pages">Pages</a>
+                </li> -->
+                <li class="breadcrumb-item active" aria-current="page">Photos</li>
+            </ol>
+        </nav>
+        <!-- <app-breadcrumb></app-breadcrumb> -->
+
+        <!-- <div class="dropdown">
+            <button class="btn btn-round" role="button" data-toggle="dropdown" aria-expanded="false">
+                <i class="material-icons">settings</i>
+            </button>
+            <div class="dropdown-menu dropdown-menu-right">
+
+                <a class="dropdown-item" href="#" data-toggle="modal" data-target="#project-edit-modal">Edit Project</a>
+                <a class="dropdown-item" href="#">Share</a>
+                <a class="dropdown-item" href="#">Mark as Complete</a>
+                <div class="dropdown-divider"></div>
+                <a class="dropdown-item text-danger" href="#">Archive</a>
+
+            </div>
+        </div> -->
+
+    </div>
+    <div class="container">
+        <div class="row justify-content-center">
+            <div class="col-lg-11 col-xl-10">
+                <div class="page-header">
+                    <h1>Photos</h1>
+                    <p class="lead">Data loaded from <a href="https://jsonplaceholder.typicode.com/photos/" class="text-decoration-underline text-primary">https://jsonplaceholder.typicode.com/photos/</a></p>
+                </div>
+                <div class="container">
+                    <div class="row">
+                        <div class="d-flex align-items-center w-100 mb-3" style="padding: 0px;">
+                          <div class="flex-grow-1 me-2">
+                            <div class="input-group input-group-round">
+                              <div class="input-group-prepend">
+                                <span class="input-group-text">
+                                  <i class="material-icons">search</i>
+                                </span>
+                              </div>
+                              <input type="search" class="form-control" style="font-size: 15px;" placeholder="Search" [(ngModel)]="searchQuery" (input)="onSearch()" aria-label="Search app">
+                            </div>
+                          </div>
+                          <div class="d-flex align-items-center">
+                            <select class="form-select text-primary" style="width: 150px; font-size: 15px;" [(ngModel)]="sortBy" (change)="onSortChange($event)">
+                              <option value="id">Sort by ID</option>
+                              <option value="userId">Sort by User</option>
+                              <option value="title">Sort by Title</option>
+                              <option value="body">Sort by Body</option>
+                            </select>
+                          </div>
+                        </div>
+                        <div>
+                            <div class="tab-content">
+                                <div class="tab-pane fade show active" id="projects" role="tabpanel">
+                                    <div class="content-list">
+                                        <div class="content-list-body row">
+                                            <div (click)="goToPhotoDetail(photo.id, photo.albumId)"
+                                                *ngFor="let photo of getPaginatedPhotos(); let i = index"
+                                                class="col-lg-4">
+                                                <div class="card card-project">
+                                                    <div class="card-body">
+                                                        <div class="card-title">
+                                                            <a>
+                                                                <h6 class="title-ellipsis" data-filter-by="text">{{
+                                                                    photo.title }}</h6>
+                                                            </a>
+                                                        </div>
+                                                        <img class="album-image" src="{{photo.thumbnailUrl}}"
+                                                            alt="{{ photo.title }}">
+                                                    </div>
+                                                </div>
+                                            </div>
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                      </div>
+                </div>
+                <!-- Pagination -->
+                <nav aria-label="Page navigation example" class="d-flex justify-content-center">
+                    <ul class="pagination">
+                      <li class="page-item" [class.disabled]="currentPage === 1">
+                        <a class="page-link" (click)="onPageChange(currentPage - 1)">Previous</a>
+                      </li>
+                      <ng-container *ngFor="let item of getPageNumbers()">
+                        <li class="page-item" [ngClass]="{ 'disabled': item === '...' || currentPage === item }">
+                          <a class="page-link buttons" *ngIf="item !== '...'" (click)="onPageChange(item)">{{ item }}</a>
+                          <span class="page-link" *ngIf="item === '...'">{{ item }}</span>
+                          <!-- <span>{{currentPage}}</span> -->
+                        </li>
+                      </ng-container>
+                      <li class="page-item" [class.disabled]="currentPage === getTotalPages()">
+                        <a class="page-link" (click)="onPageChange(currentPage + 1)">Next</a>
+                      </li>
+                    </ul>
+                  </nav>
+                  
+            </div>
+        </div>
+    </div>
+
+</div>
