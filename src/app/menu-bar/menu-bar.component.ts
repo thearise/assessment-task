@@ -1,5 +1,4 @@
 import { Component } from '@angular/core';
-import { BagObservableService } from '../services/bag-observable.service';
 import { Subscription, filter } from 'rxjs';
 import { ActivatedRoute, NavigationEnd, Router } from '@angular/router';
 // import { BagService } from '../services/bag.service';
