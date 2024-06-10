@@ -55,13 +55,13 @@
                             </select>
                           </div>
                         </div>
-                        <div>
+                        <div *ngIf="!loading && getPaginatedPosts() && getPaginatedPosts().length > 0">
                           <div class="tab-content">
                             <div class="tab-pane fade show active" id="projects" role="tabpanel">
                               <div class="content-list">
                                 <div class="content-list-body row">
-                                  <div (click)="goToAlbumDetail(album.id)" *ngFor="let album of getPaginatedPosts(); let i = index" class="col-lg-4">
-                                    <div class="card card-project">
+                                  <div *ngFor="let album of getPaginatedPosts(); let i = index" class="col-lg-4">
+                                    <div style="cursor: pointer;" (click)="goToAlbumDetail(album.id)" class="card card-project">
             
                                       <div class="card-body">
                                         <div class="card-title">
@@ -88,6 +88,20 @@
                             </div>
                           </div>
                         </div>
+                        <!-- Display Error Message -->
+                        <div *ngIf="error">
+                          <p>{{ error }}</p>
+                        </div>
+                        <!-- Display No Data for Search Result -->
+                        <div *ngIf="!error && !loading && getPaginatedPosts() && getPaginatedPosts().length == 0">
+                          <p>No data found</p>
+                        </div>
+                        <!-- Display Loader -->
+                        <div *ngIf="loading" class="d-flex justify-content-center align-items-center" style="height: 200px;">
+                          <div class="spinner-border text-primary" role="status">
+                            <span class="visually-hidden">Loading...</span>
+                          </div>
+                        </div>
                         <!-- <table class="table">
                           <thead>
                             <tr>
@@ -108,7 +122,7 @@
                       </div>
                 </div>
                 <!-- Pagination -->
-                <nav aria-label="Page navigation example" class="d-flex justify-content-center">
+                <nav *ngIf="!loading && getPaginatedPosts() && getPaginatedPosts().length > 0" aria-label="Page navigation example" class="d-flex justify-content-center">
                     <ul class="pagination">
                       <li class="page-item" [class.disabled]="currentPage === 1">
                         <a class="page-link" (click)="onPageChange(currentPage - 1)">Previous</a>

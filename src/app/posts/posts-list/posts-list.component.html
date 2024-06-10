@@ -57,7 +57,7 @@
                             </select>
                           </div>
                         </div>
-                        <table class="table">
+                        <table *ngIf="!loading && getPaginatedPosts() && getPaginatedPosts().length > 0" class="table">
                           <thead>
                             <tr>
                               <th scope="col">ID</th>
@@ -77,10 +77,24 @@
                             </tr>
                           </tbody>
                         </table>
+                        <!-- Display Error Message -->
+                        <div *ngIf="error">
+                          <p>{{ error }}</p>
+                        </div>
+                        <!-- Display No Data for Search Result -->
+                        <div *ngIf="!error && !loading && getPaginatedPosts() && getPaginatedPosts().length == 0">
+                          <p>No data found</p>
+                        </div>
+                        <!-- Display Loader -->
+                        <div *ngIf="loading" class="d-flex justify-content-center align-items-center" style="height: 200px;">
+                          <div class="spinner-border text-primary" role="status">
+                            <span class="visually-hidden">Loading...</span>
+                          </div>
+                        </div>
                       </div>
                 </div>
                 <!-- Pagination -->
-                <nav aria-label="Page navigation example" class="d-flex justify-content-center">
+                <nav *ngIf="!loading && getPaginatedPosts() && getPaginatedPosts().length > 0" aria-label="Page navigation example" class="d-flex justify-content-center">
                     <ul class="pagination">
                       <li class="page-item" [class.disabled]="currentPage === 1">
                         <a class="page-link" (click)="onPageChange(currentPage - 1)">Previous</a>

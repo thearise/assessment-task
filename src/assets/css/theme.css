@@ -8911,6 +8911,8 @@ label[class*='col'] {
     max-width: 19.5rem; }
   .kanban-board > .kanban-col.kanban-col-md {
     max-width: 30rem; }
+    .kanban-board > .kanban-col.kanban-col-sm {
+      max-width: 13rem; }
      }
 
 @media (max-width: 767.98px) {

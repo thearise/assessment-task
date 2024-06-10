@@ -10,26 +10,16 @@
         </div>
         <div class="kanban-board container-fluid mt-lg-6">
 
-            <div class="kanban-col">
+            <div class="kanban-col kanban-col-sm">
                 <div class="card-list">
                     <div class="card-list-header">
                         <h6>Reports</h6>
-                        <div class="dropdown">
-                            <button class="btn-options" type="button" id="cardlist-dropdown-button-1"
-                                data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
-                                <i class="material-icons">more_vert</i>
-                            </button>
-                            <div class="dropdown-menu dropdown-menu-right">
-                                <a class="dropdown-item" href="#">Edit</a>
-                                <a class="dropdown-item text-danger" href="#">Archive List</a>
-                            </div>
-                        </div>
                     </div>
                     <div class="card-list-body">
 
                         <div class="card card-kanban">
 
-                            <div class="card-body">
+                            <div class="card-body" style="cursor: auto !important;">
                                 <div class="card-title">
                                     <a data-toggle="modal" data-target="#task-modal">
                                         <h6>{{posts.length}} Posts</h6>
@@ -67,40 +57,61 @@
                 </div>
             </div>
 
-            <div class="kanban-col">
+            <div class="kanban-col kanban-col-md">
                 <div class="card-list">
                     <div class="card-list-header">
                         <h6>Posts</h6>
                     </div>
                     <div class="card-list-body">
-
-                        <div (click)="goToPostDetail(post.id)" class="card card-kanban" *ngFor="let post of posts">
-                            <div class="card-body">
-                                <div class="card-title">
-                                    <a class="title-ellipsis" href="#" data-toggle="modal" data-target="#task-modal">
-                                        <h6>{{post.title}}</h6>
-                                    </a>
-                                </div>
-
-                                <div class="card-meta d-flex justify-content-between">
-                                    <span class="title-ellipsis text-small">{{post.body}}</span>
+                        <!-- Loading Indicator -->
+                        <div *ngIf="loadingPost" class="text-center my-3">
+                            <div class="spinner-border text-primary" role="status">
+                                <span class="visually-hidden">Loading...</span>
+                            </div>
+                        </div>
+                        <!-- Error Message -->
+                        <div *ngIf="errorPost" role="alert">
+                            <p>{{ errorPost }}</p>
+                        </div>
+                        <!-- Display Posts -->
+                        <div *ngIf="!loadingPost && !errorPost">
+                            <div class="card card-kanban"
+                                *ngFor="let post of limitedPosts">
+                                <div class="card-body" style="cursor: pointer;" (click)="goToPostDetail(post.id)">
+                                    <div class="card-title">
+                                        <a class="title-ellipsis" href="#" data-toggle="modal"
+                                            data-target="#task-modal">
+                                            <h6>{{post.title}}</h6>
+                                        </a>
+                                    </div>
+                                    <div class="card-meta d-flex justify-content-between">
+                                        <span class="title-ellipsis text-small">{{post.body}}</span>
+                                    </div>
                                 </div>
                             </div>
                         </div>
-
                     </div>
                 </div>
             </div>
 
-            <div class="kanban-col">
+            <div class="kanban-col kanban-col-md">
                 <div class="card-list">
                     <div class="card-list-header">
                         <h6>Albums</h6>
                     </div>
                     <div class="card-list-body">
-
-                        <div (click)="goToAlbumDetail(post.id)" class="card card-kanban" *ngFor="let post of albums">
-                            <div class="card-body">
+                        <!-- Loading Indicator -->
+                        <div *ngIf="loadingAlbum" class="text-center my-3">
+                            <div class="spinner-border text-primary" role="status">
+                                <span class="visually-hidden">Loading...</span>
+                            </div>
+                        </div>
+                        <!-- Error Message -->
+                        <div *ngIf="errorAlbum" role="alert">
+                            <p>{{ errorAlbum }}</p>
+                        </div>
+                        <div class="card card-kanban" *ngFor="let post of albums">
+                            <div class="card-body" style="cursor: pointer;" (click)="goToAlbumDetail(post.id)">
                                 <div class="card-title">
                                     <a class="title-ellipsis" href="#" data-toggle="modal" data-target="#task-modal">
                                         <h6>{{post.title}}</h6>

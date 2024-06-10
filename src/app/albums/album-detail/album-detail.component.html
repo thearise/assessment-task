@@ -77,10 +77,10 @@
                                 <div class="tab-pane fade show active" id="projects" role="tabpanel">
                                     <div class="content-list">
                                         <div class="content-list-body row">
-                                            <div (click)="goToPhotoDetail(album.id, album.albumId)"
+                                            <div 
                                                 *ngFor="let album of getPaginatedPhotos(); let i = index"
                                                 class="col-lg-4">
-                                                <div class="card card-project">
+                                                <div style="cursor: pointer;" (click)="goToPhotoDetail(album.id, album.albumId)" class="card card-project">
                                                     <div class="card-body">
                                                         <div class="card-title">
                                                             <a>

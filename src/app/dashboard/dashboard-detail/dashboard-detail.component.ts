@@ -69,7 +69,7 @@ export class DashboardDetailComponent {
         this.loadingPhoto = false;
       },
       (error: any) => {
-        this.errorPhoto = "An error occurred while fetching albums.";
+        this.errorPhoto = "An error occurred while fetching photos.";
         this.loadingPhoto = false;
       }
     )
@@ -101,7 +101,7 @@ export class DashboardDetailComponent {
         this.loadingPost = false;
       },
       (error: any) => {
-        this.errorPost = "An error occurred while fetching albums.";
+        this.errorPost = "An error occurred while fetching posts.";
         this.loadingPost = false;
       }
     )
