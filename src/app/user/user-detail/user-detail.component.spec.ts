@@ -91,6 +91,4 @@ describe('UserDetailComponent', () => {
       expect(component.errorAlbum).toBe('');
     });
   });
-
-  // Add more test cases as needed for fetching photos, posts, and navigating to detail views
 });

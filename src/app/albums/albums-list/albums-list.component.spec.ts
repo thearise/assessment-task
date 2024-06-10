@@ -91,7 +91,4 @@ describe('AlbumsListComponent', () => {
       expect(component.error).toBe(errorMessage);
     });
   });
-  
-
-  // Add more test cases as needed for other functionalities
 });

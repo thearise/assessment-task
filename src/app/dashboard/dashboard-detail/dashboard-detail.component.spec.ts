@@ -96,6 +96,4 @@ describe('DashboardDetailComponent', () => {
       expect(component.errorPhoto).toBe('');
     });
   });
-
-  // Add more test cases as needed for fetching albums, posts, and navigating to detail views
 });

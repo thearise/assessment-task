@@ -72,6 +72,4 @@ describe('PhotosListComponent', () => {
     expect(component.loading).toBe(false);
     expect(component.error).toBe('An error occurred while fetching photos.');
   });
-
-  // Add more test cases as needed for other functionalities
 });
