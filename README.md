@@ -52,7 +52,21 @@ To install the necessary packages, run:
 ```sh
 npm install
 ```
+## Lazy Loading for Posts Module
+
+This project uses lazy loading for the `posts` module and its sub-components. To generate the module and components, follow these steps:
+
+1. Generate the `posts` module and its components:
+
+```sh
+ng generate module posts --routing
+ng generate component posts/posts-list --standAlone false
+ng generate component posts/post-detail --standAlone false
+```
+
+Then, Configure routes for the posts module by updating the posts-routing.module.ts file:
 
 ## Further help
 
 To get more help on the Angular CLI use `ng help` or go check out the [Angular CLI Overview and Command Reference](https://angular.io/cli) page.
+
