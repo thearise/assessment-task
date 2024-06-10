@@ -5,6 +5,7 @@ import { Album } from '../../services/albums/album.model';
 import { PaginationService } from '../../services/pagination/pagination.service';
 import { Photo } from '../../services/photos/photo.model';
 import { PhotoService } from '../../services/photos/photo.service';
+import { SortBy } from 'src/app/services/sortby/sortby.model';
 
 @Component({
   selector: 'app-album-detail',
@@ -24,6 +25,10 @@ export class AlbumDetailComponent {
   postsPerPage: number = 15;
   searchQuery: string = '';
   sortBy: string = 'id';
+  sortByList: SortBy[] = [
+    {sort: 'id', display: 'Sort By ID'},
+    {sort: 'title', display: 'Sort By Title'}
+  ]
 
   constructor(
     private route: ActivatedRoute,
@@ -98,7 +103,7 @@ export class AlbumDetailComponent {
   fetchPhotos(params: Params) {
     this.loading = true;
     this.error = '';
-    this.photoService.getPhotos(params).subscribe(
+    this.photoService.getPhotos().subscribe(
       photos => {
         this.photos = photos.filter((photo: Photo) => {
           return photo.albumId == this.idParam;
@@ -134,7 +139,8 @@ export class AlbumDetailComponent {
     });
   }
 
-  onSearch() {
+  onSearch(searchQuery: string) {
+    this.searchQuery = searchQuery;
     this.currentPage = 1;
     this.filteredPhotos();
     this.router.navigate([], {
@@ -163,12 +169,11 @@ export class AlbumDetailComponent {
   }
 
   getPaginatedPhotos(): Photo[] {
-    const startIndex = (this.currentPage - 1) * this.postsPerPage;
-    return this.filteredPhotoList.slice(startIndex, startIndex + this.postsPerPage);
+    return this.paginationService.getPaginatedItems(this.filteredPhotoList, this.currentPage, this.postsPerPage);
   }
 
   getTotalPages(): number {
-    return Math.ceil(this.filteredPhotoList.length / this.postsPerPage);
+    return this.paginationService.getTotalPages(this.filteredPhotoList, this.postsPerPage);
   }
 
   getPageNumbers(): (number | string)[] {

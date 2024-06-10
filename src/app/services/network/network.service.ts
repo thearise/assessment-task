@@ -1,22 +1,24 @@
-// services/posts/post.service.ts
 import { Injectable } from '@angular/core';
-import { HttpClient } from '@angular/common/http';
+import { HttpClient, HttpParams } from '@angular/common/http';
 import { Observable, throwError } from 'rxjs';
 import { catchError } from 'rxjs/operators';
-import { Post } from './post.model';
 
 @Injectable({
   providedIn: 'root'
 })
-export class PostService {
-  private apiUrl = 'https://jsonplaceholder.typicode.com/posts/';
+export class NetworkService {
 
-  constructor(private http: HttpClient) {}
+  constructor(private http: HttpClient) { }
 
-  getPosts(): Observable<Post[]> {
-    // You can modify this method to include query parameters
-    // based on the provided params object
-    return this.http.get<Post[]>(this.apiUrl)
+  get<T>(url: string, params?: any): Observable<T> {
+    let httpParams = new HttpParams();
+    if (params) {
+      Object.keys(params).forEach(key => {
+        httpParams = httpParams.set(key, params[key]);
+      });
+    }
+
+    return this.http.get<T>(url, { params: httpParams })
       .pipe(
         catchError(this.handleError)
       );

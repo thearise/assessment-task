@@ -1,7 +1,7 @@
-import { HttpClient } from '@angular/common/http';
 import { Injectable } from '@angular/core';
-import { catchError, throwError } from 'rxjs';
+import { NetworkService } from '../network/network.service';
 import { Photo } from './photo.model';
+import { Observable } from 'rxjs';
 
 @Injectable({
   providedIn: 'root'
@@ -9,20 +9,10 @@ import { Photo } from './photo.model';
 export class PhotoDetailService {
   private apiUrl = 'https://jsonplaceholder.typicode.com/photos/';
 
-  constructor(
-    private http: HttpClient
-  ) { }
+  constructor(private networkService: NetworkService) {}
 
-  getPhotoById(id: number) {
+  getPhotoById(id: number): Observable<Photo> {
     const url = `${this.apiUrl}/${id}`;
-    return this.http.get<Photo>(url)
-      .pipe(
-        catchError(this.handleError)
-      )
-  }
-
-  private handleError(error: any) {
-    console.log('An error occured: ', error);
-    return throwError('Something went wrong. Please try again later.');
+    return this.networkService.get<Photo>(url);
   }
 }

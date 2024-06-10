@@ -41,9 +41,9 @@ export class DashboardDetailComponent {
   ngOnInit(): void {
     this.albumId = parseInt(this.route.snapshot.paramMap.get('albumId')!, 10);
     this.route.queryParams.subscribe(params => {
-      this.fetchPhotos(params);
-      this.fetchAlbums(params);
-      this.fetchPosts(params);
+      this.fetchPhotos();
+      this.fetchAlbums();
+      this.fetchPosts();
     })
   }
 
@@ -59,10 +59,10 @@ export class DashboardDetailComponent {
 
   
 
-  fetchPhotos(params: Params) {
+  fetchPhotos() {
     this.loadingPhoto = true;
     this.errorPhoto = '';
-    this.photoService.getPhotos(params).subscribe(
+    this.photoService.getPhotos().subscribe(
       (photos: Photo[]) => {
         this.photos = photos;
         this.limitedPhotos = photos.slice(0, 9)
@@ -75,10 +75,10 @@ export class DashboardDetailComponent {
     )
   }
 
-  fetchAlbums(params: Params) {
+  fetchAlbums() {
     this.loadingAlbum = true;
     this.errorAlbum = '';
-    this.albumService.getAlbumns(params).subscribe(
+    this.albumService.getAlbumns().subscribe(
       (albums: Album[]) => {
         this.albums = albums;
         this.limitedAlbums = albums.slice(0, 9)
@@ -91,10 +91,10 @@ export class DashboardDetailComponent {
     )
   }
 
-  fetchPosts(params: Params) {
+  fetchPosts() {
     this.loadingPost = true;
     this.errorPost = '';
-    this.postService.getPosts(params).subscribe(
+    this.postService.getPosts().subscribe(
       (posts: Post[]) => {
         this.posts = posts;
         this.limitedPosts = posts.slice(0, 9)

@@ -119,7 +119,7 @@ describe('PostsListComponent', () => {
     const navigateSpy = jest.spyOn(router, 'navigate');
 
     component.searchQuery = 'test';
-    component.onSearch();
+    component.onSearch(component.searchQuery);
 
     expect(component.currentPage).toBe(1);
     expect(navigateSpy).toHaveBeenCalledWith([], {

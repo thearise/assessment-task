@@ -1,15 +1,16 @@
-import { Component } from '@angular/core';
+import { Component, OnInit } from '@angular/core';
 import { ActivatedRoute, Router } from '@angular/router';
 import { PaginationService } from '../../services/pagination/pagination.service';
 import { Photo } from '../../services/photos/photo.model';
 import { PhotoService } from '../../services/photos/photo.service';
+import { SortBy } from 'src/app/services/sortby/sortby.model';
 
 @Component({
   selector: 'app-photos-list',
   templateUrl: './photos-list.component.html',
   styleUrl: './photos-list.component.css'
 })
-export class PhotosListComponent {
+export class PhotosListComponent implements OnInit {
   photos: Photo[] = [];
   filteredPhotosList: Photo[] = [];
   loading: boolean = false;
@@ -18,6 +19,10 @@ export class PhotosListComponent {
   postsPerPage: number = 15;
   searchQuery: string = '';
   sortBy: string = 'id';
+  sortByList: SortBy[] = [
+    {sort: 'id', display: 'Sort By ID'},
+    {sort: 'title', display: 'Sort By Title'}
+  ]
 
   constructor(
     private photoService: PhotoService,
@@ -34,7 +39,7 @@ export class PhotosListComponent {
       this.currentPage = page;
       this.searchQuery = search;
       this.sortBy = sort;
-      this.fetchPhotos(params);
+      this.fetchPhotos();
     });
   }
 
@@ -43,10 +48,10 @@ export class PhotosListComponent {
     this.router.navigateByUrl(url);
   }
 
-  fetchPhotos(params: any): void {
+  fetchPhotos(): void {
     this.loading = true;
     this.error = '';
-    this.photoService.getPhotos(params).subscribe(
+    this.photoService.getPhotos().subscribe(
       photos => {
         this.photos = photos;
         this.filterPhotos();
@@ -89,7 +94,8 @@ export class PhotosListComponent {
     });
   }
 
-  onSearch(): void {
+  onSearch(searchQuery: string) {
+    this.searchQuery = searchQuery;
     this.currentPage = 1;
     this.filterPhotos();
     this.router.navigate([], {
@@ -113,12 +119,11 @@ export class PhotosListComponent {
   }
 
   getPaginatedPhotos(): Photo[] {
-    const startIndex = (this.currentPage - 1) * this.postsPerPage;
-    return this.filteredPhotosList.slice(startIndex, startIndex + this.postsPerPage);
+    return this.paginationService.getPaginatedItems(this.filteredPhotosList, this.currentPage, this.postsPerPage);
   }
 
   getTotalPages(): number {
-    return Math.ceil(this.filteredPhotosList.length / this.postsPerPage);
+    return this.paginationService.getTotalPages(this.filteredPhotosList, this.postsPerPage);
   }
 
   getPageNumbers(): (number | string)[] {

@@ -5,18 +5,19 @@ import { PhotosRoutingModule } from './photos-routing.module';
 import { PhotosListComponent } from './photos-list/photos-list.component';
 import { PhotoDetailComponent } from './photo-detail/photo-detail.component';
 import { FormsModule } from '@angular/forms';
+import { SharedComponentsModule } from '../shared-components/shared-components.module';
 
 
 @NgModule({
   declarations: [
     PhotosListComponent,
-    PhotoDetailComponent,
-
+    PhotoDetailComponent
   ],
   imports: [
     CommonModule,
     PhotosRoutingModule,
-    FormsModule
+    FormsModule,
+    SharedComponentsModule
   ]
 })
 export class PhotosModule { }

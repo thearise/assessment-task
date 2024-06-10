@@ -1,0 +1,19 @@
+<table *ngIf="!loading && posts && posts.length > 0" class="table">
+    <thead>
+        <tr>
+            <th scope="col">ID</th>
+            <th scope="col">User</th>
+            <th scope="col">Title</th>
+            <th scope="col">Body</th>
+        </tr>
+    </thead>
+    <tbody>
+        <tr class="focus-custom" (click)="onPostClick(post.id)" [class.even]="i % 2 === 0"
+            *ngFor="let post of posts; let i = index">
+            <td scope="row">{{ post.id }}</td>
+            <td>{{ post.userId }}</td>
+            <td>{{ post.title }}</td>
+            <td>{{ post.body }}</td>
+        </tr>
+    </tbody>
+</table>

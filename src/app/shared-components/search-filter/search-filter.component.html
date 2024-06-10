@@ -1,0 +1,19 @@
+<div class="d-flex align-items-center w-100 mb-3" style="padding: 0px;">
+    <div class="flex-grow-1 me-2">
+        <div class="input-group input-group-round">
+            <div class="input-group-prepend">
+                <span class="input-group-text">
+                    <i class="material-icons">search</i>
+                </span>
+            </div>
+            <input type="search" class="form-control" style="font-size: 15px;" placeholder="Search"
+                [(ngModel)]="searchQuery" (input)="onSearch()" aria-label="Search app">
+        </div>
+    </div>
+    <div class="d-flex align-items-center">
+        <select class="form-select text-primary" style="width: 150px; font-size: 15px;" [(ngModel)]="sortBy"
+            (change)="onSortChange($event)">
+            <option *ngFor="let item of sortByInput" value="{{item.sort}}">{{item.display}}</option>
+        </select>
+    </div>
+</div>

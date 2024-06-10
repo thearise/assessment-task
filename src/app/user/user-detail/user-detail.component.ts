@@ -12,6 +12,7 @@ import { PostService } from '../../services/posts/post.service';
   templateUrl: './user-detail.component.html',
   styleUrl: './user-detail.component.css'
 })
+
 export class UserDetailComponent {
   photos: Photo[] = [];
   limitedPhotos: Photo[] = [];
@@ -44,8 +45,8 @@ export class UserDetailComponent {
     this.idParam = this.route.snapshot.queryParamMap.get('id');
     this.route.queryParams.subscribe(params => {
       // this.fetchPhotos(params);
-      this.fetchAlbums(params);
-      this.fetchPosts(params);
+      this.fetchAlbums();
+      this.fetchPosts();
     })
   }
 
@@ -121,10 +122,10 @@ export class UserDetailComponent {
 
   
 
-  fetchPhotos(params: Params) {
+  fetchPhotos() {
     this.loadingPhoto = true;
     this.errorPhoto = '';
-    this.photoService.getPhotos(params).subscribe(
+    this.photoService.getPhotos().subscribe(
       (photos: Photo[]) => {
         this.photos = photos;
         this.limitedPhotos = photos.slice(0, 9)
@@ -137,11 +138,11 @@ export class UserDetailComponent {
     )
   }
 
-  fetchAlbums(params: Params) {
+  fetchAlbums() {
     this.loadingAlbum = true;
     this.errorAlbum = '';
     console.log('fetch albums: ' + this.idParam.toString());
-    this.albumService.getAlbumns(params).subscribe(
+    this.albumService.getAlbumns().subscribe(
       (albums: Album[]) => {
         this.albums = albums.filter((album: Album) => {
           return album.userId.toString() === this.idParam.toString();
@@ -156,10 +157,10 @@ export class UserDetailComponent {
     )
   }
 
-  fetchPosts(params: Params) {
+  fetchPosts() {
     this.loadingPost = true;
     this.errorPost = '';
-    this.postService.getPosts(params).subscribe(
+    this.postService.getPosts().subscribe(
       (posts: Post[]) => {
         this.posts = posts.filter((post: Post) => {
           return post.userId.toString() === this.idParam.toString();

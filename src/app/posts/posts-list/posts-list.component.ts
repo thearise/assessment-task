@@ -3,6 +3,7 @@ import { ActivatedRoute, Router } from '@angular/router';
 import { Post } from '../../services/posts/post.model';
 import { PostService } from '../../services/posts/post.service';
 import { PaginationService } from '../../services/pagination/pagination.service';
+import { SortBy } from 'src/app/services/sortby/sortby.model';
 
 @Component({
   selector: 'app-posts-list',
@@ -18,6 +19,12 @@ export class PostsListComponent implements OnInit {
   postsPerPage: number = 10;
   searchQuery: string = '';
   sortBy: string = 'id';
+  sortByList: SortBy[] = [
+    {sort: 'id', display: 'Sort By ID'},
+    {sort: 'title', display: 'Sort By Title'},
+    {sort: 'userId', display: 'Sort By User'},
+    {sort: 'body', display: 'Sort By Body'}
+  ]
 
   constructor(
     private postService: PostService,
@@ -46,7 +53,7 @@ export class PostsListComponent implements OnInit {
   fetchPosts(params: any): void {
     this.loading = true;
     this.error = '';
-    this.postService.getPosts(params).subscribe(
+    this.postService.getPosts().subscribe(
       posts => {
         this.posts = posts;
         this.filterPosts();
@@ -94,7 +101,8 @@ export class PostsListComponent implements OnInit {
     });
   }
 
-  onSearch(): void {
+  onSearch(searchQuery: string) {
+    this.searchQuery = searchQuery;
     this.currentPage = 1;
     this.filterPosts();
     this.router.navigate([], {
@@ -118,12 +126,11 @@ export class PostsListComponent implements OnInit {
   }
 
   getPaginatedPosts(): Post[] {
-    const startIndex = (this.currentPage - 1) * this.postsPerPage;
-    return this.filteredPosts.slice(startIndex, startIndex + this.postsPerPage);
+    return this.paginationService.getPaginatedItems(this.filteredPosts, this.currentPage, this.postsPerPage);
   }
 
   getTotalPages(): number {
-    return Math.ceil(this.filteredPosts.length / this.postsPerPage);
+    return this.paginationService.getTotalPages(this.filteredPosts, this.postsPerPage);
   }
 
   getPageNumbers(): (number | string)[] {

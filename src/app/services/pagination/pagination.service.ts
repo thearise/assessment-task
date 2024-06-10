@@ -1,5 +1,5 @@
-// pagination.service.ts
 import { Injectable } from '@angular/core';
+import { Photo } from '../../services/photos/photo.model';
 
 @Injectable({
   providedIn: 'root'
@@ -27,9 +27,8 @@ export class PaginationService {
     }
 
     paginationRange.push(totalPages);
-    let updatePagiRemoveDuplicate = this.removeDuplicates(paginationRange);
 
-    return updatePagiRemoveDuplicate;
+    return this.removeDuplicates(paginationRange);
   }
 
   removeDuplicates(array: (number | string)[]): (number | string)[] {
@@ -48,5 +47,14 @@ export class PaginationService {
     });
 
     return uniqueArray;
+  }
+
+  getPaginatedItems<T>(items: T[], currentPage: number, itemsPerPage: number): T[] {
+    const startIndex = (currentPage - 1) * itemsPerPage;
+    return items.slice(startIndex, startIndex + itemsPerPage);
+  }
+
+  getTotalPages(items: any[], itemsPerPage: number): number {
+    return Math.ceil(items.length / itemsPerPage);
   }
 }

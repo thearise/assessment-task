@@ -51,7 +51,7 @@
 
                 <div class="container">
                     <div class="row justify-content-center">
-                        <div class="d-flex align-items-center w-100 mb-3" style="padding: 0px;">
+                        <!-- <div class="d-flex align-items-center w-100 mb-3" style="padding: 0px;">
                             <div class="flex-grow-1 me-2">
                                 <div class="input-group input-group-round">
                                     <div class="input-group-prepend">
@@ -71,7 +71,8 @@
                                     <option value="title">Sort by Title</option>
                                 </select>
                             </div>
-                        </div>
+                        </div> -->
+                        <app-search-filter (onSearchEvent)="onSearch($event)" (onSortChangeEvent)="onSortChange($event)" [sortByInput]="sortByList" [searchQueryInput]="searchQuery"></app-search-filter>
                         <div>
                             <div class="tab-content">
                                 <div class="tab-pane fade show active" id="projects" role="tabpanel">

@@ -37,7 +37,7 @@
                 </div>
                 <div class="container">
                     <div class="row">
-                        <div class="d-flex align-items-center w-100 mb-3" style="padding: 0px;">
+                        <!-- <div class="d-flex align-items-center w-100 mb-3" style="padding: 0px;">
                           <div class="flex-grow-1 me-2">
                             <div class="input-group input-group-round">
                               <div class="input-group-prepend">
@@ -56,27 +56,14 @@
                               <option value="body">Sort by Body</option>
                             </select>
                           </div>
-                        </div>
-                        <table *ngIf="!loading && getPaginatedPosts() && getPaginatedPosts().length > 0" class="table">
-                          <thead>
-                            <tr>
-                              <th scope="col">ID</th>
-                              <th scope="col">User</th>
-                              <th scope="col">Title</th>
-                              <th scope="col">Body</th>
-                            </tr>
-                          </thead>
-                          <tbody>
-                            <tr class="focus-custom" (click)="goToPostDetail(post.id)" [class.even]="i % 2 === 0" *ngFor="let post of getPaginatedPosts(); let i = index">
-                              <td scope="row">{{ post.id }}</td>
-                              <td>{{ post.userId }}</td>
-                              <!-- <td style="max-width: 150px;" class="ellipsis-1-line">{{ post.title }}</td>
-                              <td style="max-width: 300px;" class="ellipsis-1-line">{{ post.body }}</td> -->
-                              <td>{{ post.title }}</td>
-                              <td>{{ post.body }}</td>
-                            </tr>
-                          </tbody>
-                        </table>
+                        </div> -->
+                        <app-search-filter (onSearchEvent)="onSearch($event)" (onSortChangeEvent)="onSortChange($event)" [sortByInput]="sortByList" [searchQueryInput]="searchQuery"></app-search-filter>
+                        <app-posts-table 
+                          [posts]="getPaginatedPosts()" 
+                          [loading]="loading" 
+                          (postClicked)="goToPostDetail($event)">
+                        </app-posts-table>
+
                         <!-- Display Error Message -->
                         <div *ngIf="error">
                           <p>{{ error }}</p>

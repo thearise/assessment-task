@@ -5,6 +5,7 @@ import { AlbumService } from '../../services/albums/album.service';
 import { PaginationService } from '../../services/pagination/pagination.service';
 import { Photo } from '../../services/photos/photo.model';
 import { PhotoService } from '../../services/photos/photo.service';
+import { SortBy } from 'src/app/services/sortby/sortby.model';
 
 @Component({
   selector: 'app-albums-list',
@@ -22,6 +23,11 @@ export class AlbumsListComponent {
   postsPerPage: number = 15;
   searchQuery: string = '';
   sortBy: string = 'id';
+
+  sortByList: SortBy[] = [
+    {sort: 'id', display: 'Sort By ID'},
+    {sort: 'title', display: 'Sort By Title'}
+  ]
 
   images = [
     { name: 'David Whittaker' },
@@ -49,8 +55,8 @@ export class AlbumsListComponent {
       this.currentPage = page;
       this.searchQuery = search;
       this.sortBy = sort;
-      this.fetchAlbums(params);
-      this.fetchPhotos(params);
+      this.fetchAlbums();
+      this.fetchPhotos();
     })
   }
 
@@ -62,10 +68,10 @@ export class AlbumsListComponent {
     return photos;
   }
 
-  fetchPhotos(params: Params) {
+  fetchPhotos() {
     this.loadingPhotos = true;
     this.error = '';
-    this.photoService.getPhotos(params).subscribe(
+    this.photoService.getPhotos().subscribe(
       photos => {
         this.photos = photos
         this.loadingPhotos = false;
@@ -104,10 +110,10 @@ export class AlbumsListComponent {
     this.router.navigateByUrl(url);
   }
 
-  fetchAlbums(params: Params) {
+  fetchAlbums() {
     this.loading = true;
     this.error = '';
-    this.albumService.getAlbumns(params).subscribe(
+    this.albumService.getAlbumns().subscribe(
       albums => {
         this.albums = albums
         this.filteredAlbums();
@@ -143,7 +149,8 @@ export class AlbumsListComponent {
     });
   }
 
-  onSearch() {
+  onSearch(searchQuery: string) {
+    this.searchQuery = searchQuery;
     this.currentPage = 1;
     this.filteredAlbums();
     this.router.navigate([], {
@@ -167,12 +174,11 @@ export class AlbumsListComponent {
   }
 
   getPaginatedPosts(): Album[] {
-    const startIndex = (this.currentPage - 1) * this.postsPerPage;
-    return this.filteredAlbumList.slice(startIndex, startIndex + this.postsPerPage);
+    return this.paginationService.getPaginatedItems(this.filteredAlbumList, this.currentPage, this.postsPerPage);
   }
 
   getTotalPages(): number {
-    return Math.ceil(this.filteredAlbumList.length / this.postsPerPage);
+    return this.paginationService.getTotalPages(this.filteredAlbumList, this.postsPerPage);
   }
 
   getPageNumbers(): (number | string)[] {
