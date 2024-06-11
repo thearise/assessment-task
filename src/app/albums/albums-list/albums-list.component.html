@@ -39,7 +39,7 @@
         <div class="container">
           <div class="row justify-content-center">
             <app-search-filter (onSearchEvent)="onSearch($event)" (onSortChangeEvent)="onSortChange($event)" [sortByInput]="sortByList" [searchQueryInput]="searchQuery"></app-search-filter>
-            <div *ngIf="!loading && getPaginatedPosts() && getPaginatedPosts().length > 0">
+            <div *ngIf="!errorPhoto && !loading && getPaginatedPosts() && getPaginatedPosts().length > 0">
               <div class="tab-content">
                 <div class="tab-pane fade show active" id="projects" role="tabpanel">
                   <div class="content-list">
@@ -77,8 +77,12 @@
             <div *ngIf="error">
               <p>{{ error }}</p>
             </div>
+
+            <div *ngIf="errorPhoto">
+              <p>{{ errorPhoto }}</p>
+            </div>
             <!-- Display No Data for Search Result -->
-            <div *ngIf="!error && !loading && getPaginatedPosts() && getPaginatedPosts().length == 0">
+            <div *ngIf="!errorPhoto && !error && !loading && getPaginatedPosts() && getPaginatedPosts().length == 0">
               <p>No data found</p>
             </div>
             <!-- Display Loader -->
@@ -107,7 +111,7 @@
           </div>
         </div>
         <!-- Pagination -->
-        <nav *ngIf="!loading && getPaginatedPosts() && getPaginatedPosts().length > 0"
+        <nav *ngIf="!errorPhoto && !loading && getPaginatedPosts() && getPaginatedPosts().length > 0"
           aria-label="Page navigation example" class="d-flex justify-content-center">
           <ul class="pagination">
             <li class="page-item" [class.disabled]="currentPage === 1">

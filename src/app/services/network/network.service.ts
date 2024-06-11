@@ -24,7 +24,21 @@ export class NetworkService {
       );
   }
 
-  private handleError(error: any) {
+  post<T>(url: string, body: any, params?: any): Observable<T> {
+    let httpParams = new HttpParams();
+    if (params) {
+      Object.keys(params).forEach(key => {
+        httpParams = httpParams.set(key, params[key]);
+      });
+    }
+
+    return this.http.post<T>(url, body, { params: httpParams })
+      .pipe(
+        catchError(this.handleError)
+      );
+  }
+
+  private handleError(error: Error) {
     // Handle error here, for example, log it or display a user-friendly message
     console.error('An error occurred:', error);
     // Return an observable with a user-facing error message

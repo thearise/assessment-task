@@ -8,7 +8,7 @@ import { NetworkService } from '../network/network.service';
   providedIn: 'root'
 })
 export class AlbumService {
-  private apiUrl = "https://jsonplaceholder.typicode.com/albums/";
+  private apiUrl = "https://jsonplaceholder.typicode.com/albums";
 
   constructor(
     private http: HttpClient,

@@ -60,7 +60,7 @@ export class PostsListComponent implements OnInit {
         this.loading = false;
       },
       error => {
-        this.error = 'An error occurred while fetching posts.';
+        this.error = 'An error occurred while fetching posts. ' + error;
         this.loading = false;
       }
     );

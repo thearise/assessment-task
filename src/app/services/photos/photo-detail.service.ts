@@ -1,7 +1,8 @@
+import { HttpClient } from '@angular/common/http';
 import { Injectable } from '@angular/core';
-import { NetworkService } from '../network/network.service';
+import { Observable, catchError, throwError } from 'rxjs';
 import { Photo } from './photo.model';
-import { Observable } from 'rxjs';
+import { NetworkService } from '../network/network.service';
 
 @Injectable({
   providedIn: 'root'
@@ -9,7 +10,10 @@ import { Observable } from 'rxjs';
 export class PhotoDetailService {
   private apiUrl = 'https://jsonplaceholder.typicode.com/photos/';
 
-  constructor(private networkService: NetworkService) {}
+  constructor(
+    private http: HttpClient,
+    private networkService: NetworkService,
+  ) { }
 
   getPhotoById(id: number): Observable<Photo> {
     const url = `${this.apiUrl}/${id}`;

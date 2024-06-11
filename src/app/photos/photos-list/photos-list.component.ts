@@ -58,7 +58,7 @@ export class PhotosListComponent implements OnInit {
         this.loading = false;
       },
       error => {
-        this.error = 'An error occurred while fetching photos.';
+        this.error = 'An error occurred while fetching photos. ' + error;
         this.loading = false;
       }
     );

@@ -19,6 +19,7 @@ export class AlbumsListComponent {
   loading: boolean = false;
   loadingPhotos: boolean = false;
   error: string = '';
+  errorPhoto: string = '';
   currentPage: number = 1;
   postsPerPage: number = 15;
   searchQuery: string = '';
@@ -77,7 +78,7 @@ export class AlbumsListComponent {
         this.loadingPhotos = false;
       },
       error => {
-        this.error = "An error occurred while fetching albums.";
+        this.errorPhoto = "An error occurred while fetching photos. " + error;
         this.loadingPhotos = false;
       }
     )
@@ -120,7 +121,7 @@ export class AlbumsListComponent {
         this.loading = false;
       },
       error => {
-        this.error = "An error occurred while fetching albums.";
+        this.error = "An error occurred while fetching albums. " + error;
         this.loading = false;
       }
     )

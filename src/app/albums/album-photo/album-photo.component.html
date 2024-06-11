@@ -41,7 +41,7 @@
 
                 <!-- Display Post Details -->
                 <div *ngIf="photo">
-                    <h2>{{ photo.title }}</h2>
+                    <h2>Photo - {{ photo.title }}</h2>
                     <a class="theme-color cursor-pointer" (click)="goToAlbumPage()">View Album</a>
                     <img class="photo-image" [src]="photo.url" alt="{{ photo.title }}">
                 </div>
